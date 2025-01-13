@@ -29,3 +29,35 @@ steps:
     TEST_BROWSER: chrome
   continueOnError: true
 - script: docker stop browser-container & docker rm browser-container
+
+- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-firefox:latest
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: 'default'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    goals: 'clean test'
+  env:
+    TEST_BROWSER: firefox
+  continueOnError: true
+- script: docker stop browser-container & docker rm browser-container
+
+- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-edge:latest
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: 'default'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    goals: 'clean test'
+  env:
+    TEST_BROWSER: edge
+  continueOnError: true
+- script: docker stop browser-container & docker rm browser-container
