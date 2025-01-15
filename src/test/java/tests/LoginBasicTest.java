@@ -51,6 +51,7 @@ public class LoginBasicTest {
 					System.out.println("No browser defined.");
 			}
 		} catch (Exception e) {
+			System.out.println(System.getenv("CHROMEWEBDRIVER"));
 			System.out.println("Error.");
 			e.printStackTrace();
 		}
