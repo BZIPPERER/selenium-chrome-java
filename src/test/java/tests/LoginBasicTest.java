@@ -36,13 +36,15 @@ public class LoginBasicTest {
 		try {
 			switch (System.getenv("TEST_BROWSER")) {
 				case "chrome":
-					driver = new RemoteWebDriver(new URL("http://localhost:4444"), new ChromeOptions());
+					//driver = new RemoteWebDriver(new URL("http://localhost:4444"), new ChromeOptions());
+					System.setProperty("webdriver.chrome.driver", "C:\\SeleniumWebDrivers\\ChromeDriver");
+					driver = new ChromeDriver();
 					break;
 				case "firefox":
-					driver = new RemoteWebDriver(new URL("http://localhost:4444"), new FirefoxOptions());
+					//driver = new RemoteWebDriver(new URL("http://localhost:4444"), new FirefoxOptions());
 					break;	
 				case "edge":
-					driver = new RemoteWebDriver(new URL("http://localhost:4444"), new EdgeOptions());
+					//driver = new RemoteWebDriver(new URL("http://localhost:4444"), new EdgeOptions());
 					break;
 				default:
 					System.out.println("No browser defined.");
