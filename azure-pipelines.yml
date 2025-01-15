@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: windows-2022
+  vmImage: ubuntu-22.04 # Currently ubuntu-latest
   #name: 'my-self-hosted-pool'
 
 strategy:
@@ -32,8 +32,7 @@ steps:
 #    releaseType: stable
 
 - script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-$(browser):latest
-  env:
-    DOCKER_CLI_EXPERIMENTAL: enabled
+
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
