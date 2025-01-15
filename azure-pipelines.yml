@@ -8,33 +8,4 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-  #name: 'my-self-hosted-pool'
-
-strategy:
-  matrix:
-    chromeRun:
-      browser: "chrome"
-#    firefoxRun:
-#      browser: "firefox"
-#    edgeRun:
-#      browser: "edge"
-steps:
-- task: JavaToolInstaller@1
-  inputs:
-    versionSpec: '21' # string. Required. JDK version. Default: 8.
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled' 
-  
-- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-$(browser):latest
-
-#- script: dir C:\SeleniumWebDrivers\ChromeDriver
-- script: mvn clean test
-  env:
-    TEST_BROWSER: $(browser)
-  continueOnError: true
-- script: docker stop browser-container
-- script: docker rm browser-container
-
-- publish: $(System.DefaultWorkingDirectory)/**/TEST-*.xml
-  artifact: TestReport
-
+ 
