@@ -38,7 +38,7 @@ public class LoginBasicTest {
 			switch (System.getenv("TEST_BROWSER")) {
 				case "chrome":
 					//driver = new RemoteWebDriver(new URL("http://localhost:4444"), new ChromeOptions());
-					System.setProperty("webdriver.chrome.driver", "C:\\SeleniumWebDrivers\\ChromeDriver");
+					System.setProperty("webdriver.chrome.driver", System.getenv("CHROMEWEBDRIVER"));
 					driver = new ChromeDriver();
 					break;
 				case "firefox":
