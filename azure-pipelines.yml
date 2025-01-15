@@ -31,7 +31,9 @@ steps:
 #    dockerVersion: 27.5.0
 #    releaseType: stable
 
-- script: docker run -d --name browser-container --platform=linux/amd64 -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-$(browser):latest
+- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-$(browser):latest
+  env:
+    DOCKER_CLI_EXPERIMENTAL: enabled
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
