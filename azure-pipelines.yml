@@ -19,11 +19,11 @@ strategy:
 #    edgeRun:
 #      browser: "edge"
 steps:
-#- task: JavaToolInstaller@1
-#  inputs:
-#    versionSpec: '23'
-#    jdkArchitectureOption: 'x64'
-#    jdkSourceOption: 'PreInstalled'
+- task: JavaToolInstaller@1
+  inputs:
+    versionSpec: '21'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
 #- task: Docker@2 # install Docker
 #- task: DockerInstaller@0
 #  displayName: Docker Installer
