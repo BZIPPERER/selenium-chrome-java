@@ -52,6 +52,7 @@ public class LoginBasicTest {
 			}
 		} catch (Exception e) {
 			System.out.println("Error.");
+			e.printStackTrace();
 		}
 	}
 
