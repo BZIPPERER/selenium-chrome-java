@@ -8,4 +8,23 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
- 
+  #name: 'my-self-hosted-pool'
+
+steps:
+- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chrome:latest
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: 'default'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'clean test'
+  env:
+    TEST_BROWSER: chrome
+  continueOnError: true
+- script: docker stop browser-container
+- script: docker rm browser-container
+
