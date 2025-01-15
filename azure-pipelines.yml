@@ -35,6 +35,6 @@ steps:
 - script: docker stop browser-container
 - script: docker rm browser-container
 
-- publish: $(System.DefaultWorkingDirectory)/target/surefire-reports/*
+- publish: $(System.DefaultWorkingDirectory)/**/TEST-*.xml
   artifact: TestReport
 
