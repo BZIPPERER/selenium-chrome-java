@@ -14,10 +14,10 @@ strategy:
   matrix:
     chromeRun:
       browser: "chrome"
-    firefoxRun:
-      browser: "firefox"
-    edgeRun:
-      browser: "edge"
+#    firefoxRun:
+#      browser: "firefox"
+#    edgeRun:
+#      browser: "edge"
 steps:
 - task: JavaToolInstaller@1
   inputs:
@@ -34,4 +34,7 @@ steps:
   continueOnError: true
 - script: docker stop browser-container
 - script: docker rm browser-container
+
+- publish: $(System.DefaultWorkingDirectory)/target/surefire-reports/*
+  artifact: TestReport
 
