@@ -7,40 +7,26 @@ trigger:
 - master
 
 pool:
-  vmImage: windows-2022 # Currently ubuntu-latest
+  vmImage: ubuntu-latest
   #name: 'my-self-hosted-pool'
 
 strategy:
   matrix:
     chromeRun:
       browser: "chrome"
-#    firefoxRun:
-#      browser: "firefox"
-#    edgeRun:
-#      browser: "edge"
+    firefoxRun:
+      browser: "firefox"
+    edgeRun:
+      browser: "edge"
 steps:
-- task: JavaToolInstaller@1
-  inputs:
-    versionSpec: '21'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
 
-#- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-$(browser):latest
+- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-$(browser):latest
 
-#- task: Maven@4
-#  inputs:
-#    mavenPomFile: 'pom.xml'
-#    mavenOptions: '-Xmx3072m'
-#    javaHomeOption: 'JDKVersion'
-#    jdkVersionOption: 'default'
-#    jdkArchitectureOption: 'x64'
-#    publishJUnitResults: true
-#    testResultsFiles: '**/TEST-*.xml'
-#    goals: 'clean test'
-- script: dir C:\SeleniumWebDrivers\ChromeDriver
+#- script: dir C:\SeleniumWebDrivers\ChromeDriver
 - script: mvn clean test
   env:
     TEST_BROWSER: $(browser)
   continueOnError: true
-- script: docker stop browser-container & docker rm browser-container
+- script: docker stop browser-container
+- script: docker rm browser-container
 
