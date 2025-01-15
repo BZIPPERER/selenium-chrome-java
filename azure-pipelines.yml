@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-2022
   #name: 'my-self-hosted-pool'
 
 strategy:
@@ -19,17 +19,17 @@ strategy:
 #    edgeRun:
 #      browser: "edge"
 steps:
-- task: JavaToolInstaller@1
-  inputs:
-    versionSpec: '23'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+#- task: JavaToolInstaller@1
+#  inputs:
+#    versionSpec: '23'
+#    jdkArchitectureOption: 'x64'
+#    jdkSourceOption: 'PreInstalled'
 #- task: Docker@2 # install Docker
-- task: DockerInstaller@0
-  displayName: Docker Installer
-  inputs:
-    dockerVersion: 27.5.0
-    releaseType: stable
+#- task: DockerInstaller@0
+#  displayName: Docker Installer
+#  inputs:
+#    dockerVersion: 27.5.0
+#    releaseType: stable
 
 - script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-$(browser):latest
 - task: Maven@4
