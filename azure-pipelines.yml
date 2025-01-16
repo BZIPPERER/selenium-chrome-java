@@ -16,6 +16,8 @@ steps:
     versionSpec: '21' # string. Required. JDK version. Default: 8.
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'PreInstalled' 
+
+# CHROME
 - script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chrome:latest
 - task: Maven@3
   inputs:
@@ -29,6 +31,42 @@ steps:
     goals: 'clean test'
   env:
     TEST_BROWSER: chrome
+  continueOnError: true
+- script: docker stop browser-container
+- script: docker rm browser-container
+
+# FIREFOX
+- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-firefox:latest
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: 'default'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'clean test'
+  env:
+    TEST_BROWSER: firefox
+  continueOnError: true
+- script: docker stop browser-container
+- script: docker rm browser-container
+
+# EDGE
+- script: docker run -d --name browser-container -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-edge:latest
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: 'default'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'clean test'
+  env:
+    TEST_BROWSER: edge
   continueOnError: true
 - script: docker stop browser-container
 - script: docker rm browser-container
