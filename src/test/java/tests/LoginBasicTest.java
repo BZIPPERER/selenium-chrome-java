@@ -79,6 +79,6 @@ public class LoginBasicTest {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("5. End");
+		System.out.println("5. End Version 1.0");
 	}
 }
