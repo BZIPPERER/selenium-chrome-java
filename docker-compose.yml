@@ -1,0 +1,6 @@
+services:
+  selenium:
+    image: selenium/standalone-chrome:latest
+    container_name: browser-container
+    network_mode: host
+    shm_size: "2gb"
