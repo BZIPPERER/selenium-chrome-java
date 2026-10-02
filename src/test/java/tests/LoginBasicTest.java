@@ -43,6 +43,8 @@ public class LoginBasicTest {
 	public void login() {
 		System.out.println("Test browser: ");
 		System.out.println(System.getenv("TEST_BROWSER"));
+
+		// GOOD
 		System.out.println("0. Start");
 
 		System.out.println("1. Open target page");
